@@ -40,7 +40,9 @@ describe('Auth Middleware', () => {
 
       return middleware(req, res, next)
         .then(() => {
+      
           expect(next).toHaveBeenCalledWith(errorObject);
+
         });
 
     }); // it()
@@ -58,6 +60,8 @@ describe('Auth Middleware', () => {
 
       return middleware(req,res,next)
         .then( () => {
+          expect(req).toHaveProperty('user');
+          expect(req).toHaveProperty('token');
           cachedToken = req.token;
           expect(next).toHaveBeenCalledWith();
         });
